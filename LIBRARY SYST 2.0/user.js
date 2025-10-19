@@ -16,22 +16,17 @@ const db = firebase.database();
 const bookList = document.getElementById("bookList");
 
 // Display books
-function displayBooks(snapshot) {
-  bookList.innerHTML = "";
-  snapshot.forEach(child => {
-    const book = child.val();
-    const div = document.createElement("div");
-    div.className = "book";
-    div.innerHTML = `
-      <strong>${book.title}</strong><br>
-      Status: ${book.status}<br>
-      ${book.status === "Available"
-        ? `<button onclick="requestBook('${child.key}', '${book.title}')">Request</button>`
-        : ""}
-    `;
-    bookList.appendChild(div);
-  });
-}
+div.innerHTML = `
+  <strong>${book.title}</strong><br>
+  Author: ${book.author}<br>
+  Year: ${book.year}<br>
+  Category: ${book.category}<br>
+  Status: ${book.status}<br>
+  ${book.status === "Available"
+    ? `<button onclick="requestBook('${child.key}', '${book.title}')">Request</button>`
+    : ""}
+`;
+
 
 // Real-time updates for books
 db.ref("books").on("value", displayBooks);

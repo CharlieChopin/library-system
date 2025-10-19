@@ -22,10 +22,34 @@ const generateReportBtn = document.getElementById("generateReport");
 // Add new book
 addBookBtn.addEventListener("click", () => {
   const title = document.getElementById("bookTitle").value.trim();
-  if (!title) return alert("Enter a book title!");
-  const newBook = { title, status: "Available" };
-  db.ref("books").push(newBook);
-  document.getElementById("bookTitle").value = "";
+  const author = document.getElementById("bookAuthor").value.trim();
+  const year = document.getElementById("bookYear").value.trim();
+  const category = document.getElementById("bookCategory").value.trim();
+
+  if (!title || !author || !year || !category) {
+    return alert("Please fill out all fields!");
+  }
+
+  const newBook = {
+    title,
+    author,
+    year,
+    category,
+    status: "Available"
+  };
+
+  db.ref("books").push(newBook)
+    .then(() => {
+      alert("Book added successfully!");
+      document.getElementById("bookTitle").value = "";
+      document.getElementById("bookAuthor").value = "";
+      document.getElementById("bookYear").value = "";
+      document.getElementById("bookCategory").value = "";
+    })
+    .catch(err => {
+      console.error("Error adding book:", err);
+      alert("Failed to add book. Check console for details.");
+    });
 });
 
 // Display books
@@ -36,12 +60,17 @@ db.ref("books").on("value", (snapshot) => {
     const div = document.createElement("div");
     div.className = "book";
     div.innerHTML = `
-      <strong>${book.title}</strong> - ${book.status}
+      <strong>${book.title}</strong><br>
+      Author: ${book.author}<br>
+      Year: ${book.year}<br>
+      Category: ${book.category}<br>
+      Status: ${book.status}<br>
       <button onclick="removeBook('${child.key}')">🗑 Remove</button>
     `;
     adminBookList.appendChild(div);
   });
 });
+
 
 // Remove book
 function removeBook(id) {
