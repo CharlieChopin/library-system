@@ -1,0 +1,57 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f6fa;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+header, footer {
+  background-color: #2f3640;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}
+
+main {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+h2 {
+  border-bottom: 2px solid #2f3640;
+  padding-bottom: 5px;
+}
+
+#bookList, #adminBookList, #requestList {
+  margin-top: 20px;
+}
+
+.book, .request {
+  background: white;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+button {
+  background-color: #0097e6;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #0077b6;
+}
+
+input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
